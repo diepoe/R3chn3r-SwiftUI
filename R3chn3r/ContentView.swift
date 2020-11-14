@@ -29,7 +29,12 @@ struct NumberTextFieldStyle: TextFieldStyle {
         configuration
             .padding()
             .foregroundColor(.white)
+<<<<<<< Updated upstream
             .font(.title)
+=======
+            .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+            .frame(minHeight: 225)
+>>>>>>> Stashed changes
     }
 }
 
