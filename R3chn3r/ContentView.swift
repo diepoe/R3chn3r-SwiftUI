@@ -9,73 +9,27 @@ import SwiftUI
 
 // custom styles
 struct NumberButtonStyle: ButtonStyle {
-    func makeBody(configuration: Self.Configuration) -> some View {
+    
+    let color: Color
+    
+    func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(maxWidth: .infinity, minHeight: 75)
-            .background(Color(.darkGray))
-            .foregroundColor(Color(.white))
-            .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-            .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
-            .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
-        
-            
-            
-    }
-}
-
-struct ZeroNumberButtonStyle: ButtonStyle {
-    func makeBody(configuration: Self.Configuration) -> some View {
-        configuration.label
-            .frame(maxWidth: .infinity, minHeight: 75)
-            .background(Color(.darkGray))
-            .foregroundColor(Color(.white))
-            .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-            .clipShape(Rectangle())
-            .cornerRadius(40)
-            .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
-        
-            
-            
+            .background(configuration.isPressed ? color.opacity(0.5) : color)
+            .foregroundColor(Color.white)
+            .font(.title)
+            .clipShape(Circle())
     }
 }
 
 
-struct OrangeNumberButtonStyle: ButtonStyle {
-    func makeBody(configuration: Self.Configuration) -> some View {
-        configuration.label
-            .frame(maxWidth: .infinity, minHeight: 75)
-            .background(Color(.orange))
-            .foregroundColor(Color(.white))
-            .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-            .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
-            .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
-        
-            
-            
-    }
-}
-
-struct LightNumberButtonStyle: ButtonStyle {
-    func makeBody(configuration: Self.Configuration) -> some View {
-        configuration.label
-            .frame(maxWidth: .infinity, minHeight: 75)
-            .background(Color(.gray))
-            .foregroundColor(Color(.white))
-            .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-            .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
-            .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
-        
-            
-            
-    }
-}
 
 struct NumberTextFieldStyle: TextFieldStyle {
     func _body(configuration: TextField<_Label>) -> some View {
         configuration
             .padding()
             .foregroundColor(.white)
-            .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+            .font(.title)
     }
 }
 
@@ -90,7 +44,7 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             Color(.lightGray).ignoresSafeArea()
-            VStack {
+            VStack(spacing: 10) {
                 HStack {
                     TextField("", text: $rechnungEingegeben).textFieldStyle(NumberTextFieldStyle()).keyboardType(.decimalPad)
                     if ergebnis.isNormal {
@@ -98,63 +52,63 @@ struct ContentView: View {
                     }
                 }
                 
-                
+                Spacer()
                 HStack{
                     
                     Button(action: {
                             self.rechnungEingegeben = ""
                             self.ergebnis = 0
-                    }){Image(systemName: "trash").imageScale(.small).foregroundColor(.orange)}.buttonStyle(LightNumberButtonStyle())
+                    }){Image(systemName: "trash").imageScale(.small).foregroundColor(.orange)}.buttonStyle(NumberButtonStyle(color: .gray))
                     
-                    Button(action: {self.rechnungEingegeben += ""}){Image(systemName: "x.squareroot").imageScale(.small)}.buttonStyle(LightNumberButtonStyle())
+                    Button(action: {self.rechnungEingegeben += ""}){Image(systemName: "x.squareroot").imageScale(.small)}.buttonStyle(NumberButtonStyle(color: .gray))
                     
                     Button(action: {
                             self.rechnungEingegeben += ""
                         let format: Double? = Double(rechnungEingegeben)
                         ergebnis = format! / 100
-                    }){Image(systemName: "percent").imageScale(.small)}.buttonStyle(LightNumberButtonStyle())
+                    }){Image(systemName: "percent").imageScale(.small)}.buttonStyle(NumberButtonStyle(color: .gray))
                     
-                    Button(action: {self.rechnungEingegeben += "/"}){Image(systemName: "divide").imageScale(.small)}.buttonStyle(OrangeNumberButtonStyle())
+                    Button(action: {self.rechnungEingegeben += "/"}){Image(systemName: "divide").imageScale(.small)}.buttonStyle(NumberButtonStyle(color: .orange))
                 }
-                Spacer()
+//                Spacer()
                 HStack {
-                    Button(action: {self.rechnungEingegeben += "7"}){Text("7")}.buttonStyle(NumberButtonStyle())
+                    Button(action: {self.rechnungEingegeben += "7"}){Text("7")}.buttonStyle(NumberButtonStyle(color: Color(.darkGray)))
                     
-                    Button(action: {self.rechnungEingegeben += "8"}){Text("8")}.buttonStyle(NumberButtonStyle())
+                    Button(action: {self.rechnungEingegeben += "8"}){Text("8")}.buttonStyle(NumberButtonStyle(color: Color(.darkGray)))
                     
-                    Button(action: {self.rechnungEingegeben += "9"}){Text("9")}.buttonStyle(NumberButtonStyle())
+                    Button(action: {self.rechnungEingegeben += "9"}){Text("9")}.buttonStyle(NumberButtonStyle(color: Color(.darkGray)))
                     
-                    Button(action: {self.rechnungEingegeben += "*"}){Image(systemName: "multiply").imageScale(.small)}.buttonStyle(OrangeNumberButtonStyle())
+                    Button(action: {self.rechnungEingegeben += "*"}){Image(systemName: "multiply").imageScale(.small)}.buttonStyle(NumberButtonStyle(color: .orange))
                 
                 }
-                Spacer()
+//                Spacer()
                 HStack {
-                    Button(action: {self.rechnungEingegeben += "4"}){Text("4")}.buttonStyle(NumberButtonStyle())
+                    Button(action: {self.rechnungEingegeben += "4"}){Text("4")}.buttonStyle(NumberButtonStyle(color: Color(.darkGray)))
                     
-                    Button(action: {self.rechnungEingegeben += "5"}){Text("5")}.buttonStyle(NumberButtonStyle())
+                    Button(action: {self.rechnungEingegeben += "5"}){Text("5")}.buttonStyle(NumberButtonStyle(color: Color(.darkGray)))
                     
-                    Button(action: {self.rechnungEingegeben += "6"}){Text("6")}.buttonStyle(NumberButtonStyle())
+                    Button(action: {self.rechnungEingegeben += "6"}){Text("6")}.buttonStyle(NumberButtonStyle(color: Color(.darkGray)))
                     
-                    Button(action: {self.rechnungEingegeben += "-"}){Image(systemName: "minus").imageScale(.small)}.buttonStyle(OrangeNumberButtonStyle())
+                    Button(action: {self.rechnungEingegeben += "-"}){Image(systemName: "minus").imageScale(.small)}.buttonStyle(NumberButtonStyle(color: .orange))
                 }
-                Spacer()
+//                Spacer()
                 HStack {
-                    Button(action: {self.rechnungEingegeben += "1"}){Text("1")}.buttonStyle(NumberButtonStyle())
+                    Button(action: {self.rechnungEingegeben += "1"}){Text("1")}.buttonStyle(NumberButtonStyle(color: Color(.darkGray)))
                     
-                    Button(action: {self.rechnungEingegeben += "2"}){Text("2")}.buttonStyle(NumberButtonStyle())
+                    Button(action: {self.rechnungEingegeben += "2"}){Text("2")}.buttonStyle(NumberButtonStyle(color: Color(.darkGray)))
                     
-                    Button(action: {self.rechnungEingegeben += "3"}){Text("3")}.buttonStyle(NumberButtonStyle())
+                    Button(action: {self.rechnungEingegeben += "3"}){Text("3")}.buttonStyle(NumberButtonStyle(color: Color(.darkGray)))
                     
-                    Button(action: {self.rechnungEingegeben += "+"}){Image(systemName: "plus").imageScale(.small)}.buttonStyle(OrangeNumberButtonStyle())
+                    Button(action: {self.rechnungEingegeben += "+"}){Image(systemName: "plus").imageScale(.small)}.buttonStyle(NumberButtonStyle(color: .orange))
                 }
-                Spacer()
+//                Spacer()
                 HStack {
                     
-                    Button(action: {self.rechnungEingegeben += "( )"}){Text("( )")}.buttonStyle(LightNumberButtonStyle())
+                    Button(action: {self.rechnungEingegeben += "( )"}){Text("( )")}.buttonStyle(NumberButtonStyle(color: .gray))
                     
-                    Button(action: {self.rechnungEingegeben += "0"}){Text("0")}.buttonStyle(NumberButtonStyle())
+                    Button(action: {self.rechnungEingegeben += "0"}){Text("0")}.buttonStyle(NumberButtonStyle(color: Color(.darkGray)))
                     
-                    Button(action: {self.rechnungEingegeben += "."}){Text(",")}.buttonStyle(LightNumberButtonStyle())
+                    Button(action: {self.rechnungEingegeben += "."}){Text(",")}.buttonStyle(NumberButtonStyle(color: .gray))
                     
         
                     
@@ -164,7 +118,7 @@ struct ContentView: View {
                             ergebnis = backend.endergebnis!
                             }
                         
-                    }){Image(systemName: "equal").imageScale(.small)}.buttonStyle(OrangeNumberButtonStyle())
+                    }){Image(systemName: "equal").imageScale(.small)}.buttonStyle(NumberButtonStyle(color: .orange))
                 }
             }.padding()
         }
