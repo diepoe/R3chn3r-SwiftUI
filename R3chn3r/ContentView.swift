@@ -30,7 +30,8 @@ struct NumberTextFieldStyle: TextFieldStyle {
             .padding()
             .foregroundColor(.white)
             .font(.title)
-            .frame(minHeight: 225)
+            .frame(minHeight: 100)
+            .ignoresSafeArea(edges: .top)
 
     }
 }
@@ -39,8 +40,7 @@ struct NumberTextFieldStyle: TextFieldStyle {
 struct ContentView: View {
     @State private var rechnungEingegeben: String=""
     //  @Binding var rechnung: Double
-    @State private var ergebnis: Double = 0
-    @State private var backend = Backend()
+    @State private var ergebnis: String = ""
    
     
     var body: some View {
@@ -49,9 +49,9 @@ struct ContentView: View {
             VStack(spacing: 10) {
                 HStack {
                     TextField("", text: $rechnungEingegeben).textFieldStyle(NumberTextFieldStyle()).keyboardType(.decimalPad)
-                    if ergebnis.isNormal {
-                        Text(String(ergebnis)).font(.largeTitle).foregroundColor(.orange)
-                    }
+                   
+                        Text(ergebnis).font(.largeTitle).foregroundColor(.orange)
+                    
                 }
                 
                 Spacer()
@@ -59,7 +59,7 @@ struct ContentView: View {
                     
                     Button(action: {
                             self.rechnungEingegeben = ""
-                            self.ergebnis = 0
+                            self.ergebnis = ""
                     }){Image(systemName: "trash").imageScale(.small).foregroundColor(.orange)}.buttonStyle(NumberButtonStyle(color: .gray))
                     
                     Button(action: {self.rechnungEingegeben += ""}){Image(systemName: "x.squareroot").imageScale(.small)}.buttonStyle(NumberButtonStyle(color: .gray))
@@ -67,7 +67,7 @@ struct ContentView: View {
                     Button(action: {
                             self.rechnungEingegeben += ""
                         let format: Double? = Double(rechnungEingegeben)
-                        ergebnis = format! / 100
+                        ergebnis = String(format! / 100)
                     }){Image(systemName: "percent").imageScale(.small)}.buttonStyle(NumberButtonStyle(color: .gray))
                     
                     Button(action: {self.rechnungEingegeben += "/"}){Image(systemName: "divide").imageScale(.small)}.buttonStyle(NumberButtonStyle(color: .orange))
@@ -115,10 +115,7 @@ struct ContentView: View {
         
                     
                     Button(action: {
-                        backend.performOperation("+")
-                        if backend.endergebnis != nil {
-                            ergebnis = backend.endergebnis!
-                            }
+                        ergebnis = Backend(rawData: rechnungEingegeben)
                         
                     }){Image(systemName: "equal").imageScale(.small)}.buttonStyle(NumberButtonStyle(color: .orange))
                 }
