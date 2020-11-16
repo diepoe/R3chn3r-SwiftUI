@@ -47,6 +47,7 @@ struct ContentView: View {
         ZStack {
             Color(.lightGray).ignoresSafeArea()
             VStack(spacing: 10) {
+                // Stack with the input and result field
                 HStack {
                     TextField("", text: $rechnungEingegeben).textFieldStyle(NumberTextFieldStyle()).keyboardType(.decimalPad)
                    
@@ -55,6 +56,7 @@ struct ContentView: View {
                 }
                 
                 Spacer()
+                // first line of buttons
                 HStack{
                     
                     Button(action: {
@@ -73,6 +75,7 @@ struct ContentView: View {
                     Button(action: {self.rechnungEingegeben += "/"}){Image(systemName: "divide").imageScale(.small)}.buttonStyle(NumberButtonStyle(color: .orange))
                 }
 //                Spacer()
+                // second line of buttons
                 HStack {
                     Button(action: {self.rechnungEingegeben += "7"}){Text("7")}.buttonStyle(NumberButtonStyle(color: Color(.darkGray)))
                     
@@ -84,6 +87,7 @@ struct ContentView: View {
                 
                 }
 //                Spacer()
+                // third line of buttons
                 HStack {
                     Button(action: {self.rechnungEingegeben += "4"}){Text("4")}.buttonStyle(NumberButtonStyle(color: Color(.darkGray)))
                     
@@ -94,6 +98,7 @@ struct ContentView: View {
                     Button(action: {self.rechnungEingegeben += "-"}){Image(systemName: "minus").imageScale(.small)}.buttonStyle(NumberButtonStyle(color: .orange))
                 }
 //                Spacer()
+                // fourth line of buttons
                 HStack {
                     Button(action: {self.rechnungEingegeben += "1"}){Text("1")}.buttonStyle(NumberButtonStyle(color: Color(.darkGray)))
                     
@@ -104,6 +109,7 @@ struct ContentView: View {
                     Button(action: {self.rechnungEingegeben += "+"}){Image(systemName: "plus").imageScale(.small)}.buttonStyle(NumberButtonStyle(color: .orange))
                 }
 //                Spacer()
+                // fith line of buttons
                 HStack {
                     
                     Button(action: {self.rechnungEingegeben += "( )"}){Text("( )")}.buttonStyle(NumberButtonStyle(color: .gray))
@@ -113,7 +119,7 @@ struct ContentView: View {
                     Button(action: {self.rechnungEingegeben += "."}){Text(",")}.buttonStyle(NumberButtonStyle(color: .gray))
                     
         
-                    
+                    // equal button who calls the backend calculation process at backend.swift 
                     Button(action: {
                         ergebnis = Backend(rawData: rechnungEingegeben)
                         
