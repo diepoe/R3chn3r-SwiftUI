@@ -9,6 +9,62 @@ import Foundation
 
 
 func Backend(rawData: String) -> String {
-    let result: String = rawData
+    var rawArrow: Array<Any> = []
+    var result: String = " "
+    
+    if rawData.contains("+"){
+        rawArrow = rawData.components(separatedBy: "+")
+        
+        let oneString = rawArrow[0]
+        let twoString = rawArrow[1]
+        
+        let one = Double(oneString as! String) ?? 0.0
+        let two = Double(twoString as! String) ?? 0.0
+        
+        let resultDouble = one + two
+        result = String(resultDouble)
+    }
+    
+    if rawData.contains("-"){
+        rawArrow = rawData.components(separatedBy: "-")
+        
+        let oneString = rawArrow[0]
+        let twoString = rawArrow[1]
+        
+        let one = Double(oneString as! String) ?? 0.0
+        let two = Double(twoString as! String) ?? 0.0
+        
+        let resultDouble = one - two
+        result = String(resultDouble)
+    }
+    
+    if rawData.contains("*"){
+        rawArrow = rawData.components(separatedBy: "*")
+        
+        let oneString = rawArrow[0]
+        let twoString = rawArrow[1]
+        
+        let one = Double(oneString as! String) ?? 0.0
+        let two = Double(twoString as! String) ?? 0.0
+        
+        let resultDouble = one * two
+        result = String(resultDouble)
+    }
+    
+    if rawData.contains("/"){
+        rawArrow = rawData.components(separatedBy: "/")
+        
+        let oneString = rawArrow[0]
+        let twoString = rawArrow[1]
+        
+        let one = Double(oneString as! String) ?? 0.0
+        let two = Double(twoString as! String) ?? 0.0
+        
+        let resultDouble = one / two
+        result = String(resultDouble)
+    }
+    
+    
+    
     return result
 }
