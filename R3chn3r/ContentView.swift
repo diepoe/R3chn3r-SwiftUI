@@ -41,7 +41,8 @@ struct ContentView: View {
     @State private var rechnungEingegeben: String=""
     //  @Binding var rechnung: Double
     @State private var ergebnis: String = ""
-   
+    @State private var menu: Bool = false
+    
     
     var body: some View {
         ZStack {
@@ -51,12 +52,26 @@ struct ContentView: View {
                 HStack {
                     TextField("", text: $rechnungEingegeben).textFieldStyle(NumberTextFieldStyle()).keyboardType(.decimalPad)
                    
-                        Text(ergebnis).font(.largeTitle).foregroundColor(.orange)
+                    Text(ergebnis).font(.largeTitle).foregroundColor(Color(.cyan))
                     
                 }
                 
                 Spacer()
                 // first line of buttons
+                
+                if menu {
+                    HStack {
+                        Button(action: {self.rechnungEingegeben += ""}){Image(systemName: "x.squareroot").imageScale(.small)}.buttonStyle(NumberButtonStyle(color: Color(.darkGray)))
+                        
+                        Button(action: {self.rechnungEingegeben += "8"}){Text("8")}.buttonStyle(NumberButtonStyle(color: Color(.darkGray)))
+                        
+                        Button(action: {self.rechnungEingegeben += "9"}){Text("9")}.buttonStyle(NumberButtonStyle(color: Color(.darkGray)))
+                        
+                        Button(action: {self.rechnungEingegeben += "*"}){Image(systemName: "multiply").imageScale(.small)}.buttonStyle(NumberButtonStyle(color: Color(.darkGray)))
+                    
+                    }
+                }
+                
                 HStack{
                     
                     Button(action: {
@@ -64,7 +79,7 @@ struct ContentView: View {
                             self.ergebnis = ""
                     }){Image(systemName: "trash").imageScale(.small).foregroundColor(.orange)}.buttonStyle(NumberButtonStyle(color: .gray))
                     
-                    Button(action: {self.rechnungEingegeben += ""}){Image(systemName: "x.squareroot").imageScale(.small)}.buttonStyle(NumberButtonStyle(color: .gray))
+                    Button(action: {self.menu = !self.menu}){Image(systemName: "plus.slash.minus").imageScale(.small)}.buttonStyle(NumberButtonStyle(color: .gray))
                     
                     Button(action: {
                             self.rechnungEingegeben += ""
@@ -112,7 +127,19 @@ struct ContentView: View {
                 // fith line of buttons
                 HStack {
                     
-                    Button(action: {self.rechnungEingegeben += "( )"}){Text("( )")}.buttonStyle(NumberButtonStyle(color: .gray))
+                    Text("( )")
+                        .frame(maxWidth: .infinity, minHeight: 75)
+                        .background(Color(.darkGray))
+                        .foregroundColor(Color.white)
+                        .font(.title)
+                        .clipShape(Circle())
+                        .contextMenu {
+                        Button(action: {self.rechnungEingegeben += "("}){Text("(")}.buttonStyle(NumberButtonStyle(color: Color(.darkGray)))
+                        
+                        Button(action: {self.rechnungEingegeben += ")"}){Text(")")}.buttonStyle(NumberButtonStyle(color: Color(.darkGray)))
+                    }
+                    
+                    
                     
                     Button(action: {self.rechnungEingegeben += "0"}){Text("0")}.buttonStyle(NumberButtonStyle(color: Color(.darkGray)))
                     
