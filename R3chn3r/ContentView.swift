@@ -57,21 +57,34 @@ struct ContentView: View {
                 }
                 
                 Spacer()
-                // first line of buttons
                 
+                // invisible line with buttons with special characters
                 if menu {
                     HStack {
-                        Button(action: {self.rechnungEingegeben += ""}){Image(systemName: "x.squareroot").imageScale(.small)}.buttonStyle(NumberButtonStyle(color: Color(.darkGray)))
+                        Button(action: {self.rechnungEingegeben += ""}){Image(systemName: "x.squareroot").imageScale(.small)}.buttonStyle(NumberButtonStyle(color: Color(.gray)))
                         
-                        Button(action: {self.rechnungEingegeben += "8"}){Text("8")}.buttonStyle(NumberButtonStyle(color: Color(.darkGray)))
+                        Button(action: {self.rechnungEingegeben += ""}){Text("π")}.buttonStyle(NumberButtonStyle(color: Color(.gray)))
                         
-                        Button(action: {self.rechnungEingegeben += "9"}){Text("9")}.buttonStyle(NumberButtonStyle(color: Color(.darkGray)))
+                        Button(action: {self.rechnungEingegeben += "^"}){Text("^")}.buttonStyle(NumberButtonStyle(color: Color(.gray)))
                         
-                        Button(action: {self.rechnungEingegeben += "*"}){Image(systemName: "multiply").imageScale(.small)}.buttonStyle(NumberButtonStyle(color: Color(.darkGray)))
+                        Text("trig")
+                            .frame(maxWidth: .infinity, minHeight: 75)
+                            .background(Color(.gray))
+                            .foregroundColor(Color.white)
+                            .font(.title)
+                            .clipShape(Circle())
+                            .contextMenu {
+                            Button(action: {self.rechnungEingegeben += "sin"}){Text("sin")}.buttonStyle(NumberButtonStyle(color: Color(.darkGray)))
+                            
+                            Button(action: {self.rechnungEingegeben += "cos"}){Text("cos")}.buttonStyle(NumberButtonStyle(color: Color(.darkGray)))
+                                
+                            Button(action: {self.rechnungEingegeben += "tan"}){Text("tan")}.buttonStyle(NumberButtonStyle(color: Color(.darkGray)))
+                        }
                     
                     }
                 }
                 
+                // first visble line of buttons
                 HStack{
                     
                     Button(action: {
@@ -79,12 +92,19 @@ struct ContentView: View {
                             self.ergebnis = ""
                     }){Image(systemName: "trash").imageScale(.small).foregroundColor(.orange)}.buttonStyle(NumberButtonStyle(color: .gray))
                     
+                    // button that toggles the first invisible line of buttons with the special characters
                     Button(action: {self.menu = !self.menu}){Image(systemName: "plus.slash.minus").imageScale(.small)}.buttonStyle(NumberButtonStyle(color: .gray))
                     
                     Button(action: {
+                        if self.rechnungEingegeben == "" {
+                            ergebnis = "undef"
+                        }
+                        else {
                             self.rechnungEingegeben += ""
-                        let format: Double? = Double(rechnungEingegeben)
-                        ergebnis = String(format! / 100)
+                            let format: Double? = Double(rechnungEingegeben)
+                            ergebnis = String(format! / 100)
+
+                        }
                     }){Image(systemName: "percent").imageScale(.small)}.buttonStyle(NumberButtonStyle(color: .gray))
                     
                     Button(action: {self.rechnungEingegeben += "/"}){Image(systemName: "divide").imageScale(.small)}.buttonStyle(NumberButtonStyle(color: .orange))
