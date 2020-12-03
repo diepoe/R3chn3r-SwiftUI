@@ -82,7 +82,6 @@ func Backend(rawData: String) -> String {
     
     if rawData.contains("√"){
         rawArrow = rawData.components(separatedBy: "√")
-        print(rawArrow)
         
         let oneString = rawArrow[1]
         

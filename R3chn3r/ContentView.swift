@@ -53,7 +53,8 @@ struct ContentView: View {
                 HStack {
                     TextField("", text: $rechnungEingegeben).textFieldStyle(NumberTextFieldStyle()).keyboardType(.decimalPad)
                    
-                    Text(ergebnis).font(.largeTitle).foregroundColor(Color(.cyan))
+                    Text(ergebnis).font(.largeTitle).foregroundColor(Color(.systemOrange))
+                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     
                 }
                 
@@ -62,15 +63,15 @@ struct ContentView: View {
                 // invisible line with buttons with special characters
                 if menu {
                     HStack {
-                        Button(action: {self.rechnungEingegeben += "√"}){Image(systemName: "x.squareroot").imageScale(.small)}.buttonStyle(NumberButtonStyle(color: Color(.gray)))
+                        Button(action: {self.rechnungEingegeben += "√"}){Image(systemName: "x.squareroot").imageScale(.small)}.buttonStyle(NumberButtonStyle(color: .gray))
                         
-                        Button(action: {self.rechnungEingegeben += String(Double.pi)}){Text("π")}.buttonStyle(NumberButtonStyle(color: Color(.gray)))
+                        Button(action: {self.rechnungEingegeben += String(Double.pi)}){Text("π")}.buttonStyle(NumberButtonStyle(color: .gray))
                         
-                        Button(action: {self.rechnungEingegeben += "^"}){Text("^")}.buttonStyle(NumberButtonStyle(color: Color(.gray)))
+                        Button(action: {self.rechnungEingegeben += "^"}){Text("^")}.buttonStyle(NumberButtonStyle(color: .gray))
                         
                         Text("trig")
                             .frame(maxWidth: .infinity, minHeight: 75)
-                            .background(Color(.gray))
+                            .background(Color.gray)
                             .foregroundColor(Color.white)
                             .font(.title)
                             .clipShape(Circle())
