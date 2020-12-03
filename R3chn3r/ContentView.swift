@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Darwin
 
 // custom styles
 struct NumberButtonStyle: ButtonStyle {
@@ -61,9 +62,9 @@ struct ContentView: View {
                 // invisible line with buttons with special characters
                 if menu {
                     HStack {
-                        Button(action: {self.rechnungEingegeben += ""}){Image(systemName: "x.squareroot").imageScale(.small)}.buttonStyle(NumberButtonStyle(color: Color(.gray)))
+                        Button(action: {self.rechnungEingegeben += "√"}){Image(systemName: "x.squareroot").imageScale(.small)}.buttonStyle(NumberButtonStyle(color: Color(.gray)))
                         
-                        Button(action: {self.rechnungEingegeben += ""}){Text("π")}.buttonStyle(NumberButtonStyle(color: Color(.gray)))
+                        Button(action: {self.rechnungEingegeben += String(Double.pi)}){Text("π")}.buttonStyle(NumberButtonStyle(color: Color(.gray)))
                         
                         Button(action: {self.rechnungEingegeben += "^"}){Text("^")}.buttonStyle(NumberButtonStyle(color: Color(.gray)))
                         
