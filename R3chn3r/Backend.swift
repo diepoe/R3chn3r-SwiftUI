@@ -12,14 +12,14 @@ import Darwin
 func Backend(rawData: String) -> String {
 
     
-    var rawArrow: Array<Any> = []
+    var rawArray: Array<Any> = []
     var result: String = " "
     
     if rawData.contains("+"){
-        rawArrow = rawData.components(separatedBy: "+")
+        rawArray = rawData.components(separatedBy: "+")
         
-        let oneString = rawArrow[0]
-        let twoString = rawArrow[1]
+        let oneString = rawArray[0]
+        let twoString = rawArray[1]
         
         let one = Double(oneString as! String) ?? 0.0
         let two = Double(twoString as! String) ?? 0.0
@@ -29,10 +29,10 @@ func Backend(rawData: String) -> String {
     }
     
     if rawData.contains("-"){
-        rawArrow = rawData.components(separatedBy: "-")
+        rawArray = rawData.components(separatedBy: "-")
         
-        let oneString = rawArrow[0]
-        let twoString = rawArrow[1]
+        let oneString = rawArray[0]
+        let twoString = rawArray[1]
         
         let one = Double(oneString as! String) ?? 0.0
         let two = Double(twoString as! String) ?? 0.0
@@ -42,10 +42,10 @@ func Backend(rawData: String) -> String {
     }
     
     if rawData.contains("*"){
-        rawArrow = rawData.components(separatedBy: "*")
+        rawArray = rawData.components(separatedBy: "*")
         
-        let oneString = rawArrow[0]
-        let twoString = rawArrow[1]
+        let oneString = rawArray[0]
+        let twoString = rawArray[1]
         
         let one = Double(oneString as! String) ?? 0.0
         let two = Double(twoString as! String) ?? 0.0
@@ -55,10 +55,10 @@ func Backend(rawData: String) -> String {
     }
     
     if rawData.contains("/"){
-        rawArrow = rawData.components(separatedBy: "/")
+        rawArray = rawData.components(separatedBy: "/")
         
-        let oneString = rawArrow[0]
-        let twoString = rawArrow[1]
+        let oneString = rawArray[0]
+        let twoString = rawArray[1]
         
         let one = Double(oneString as! String) ?? 0.0
         let two = Double(twoString as! String) ?? 0.0
@@ -68,10 +68,10 @@ func Backend(rawData: String) -> String {
     }
     
     if rawData.contains("^"){
-        rawArrow = rawData.components(separatedBy: "^")
+        rawArray = rawData.components(separatedBy: "^")
         
-        let oneString = rawArrow[0]
-        let twoString = rawArrow[1]
+        let oneString = rawArray[0]
+        let twoString = rawArray[1]
         
         let one = Double(oneString as! String) ?? 0.0
         let two = Double(twoString as! String) ?? 0.0
@@ -81,9 +81,9 @@ func Backend(rawData: String) -> String {
     }
     
     if rawData.contains("√"){
-        rawArrow = rawData.components(separatedBy: "√")
+        rawArray = rawData.components(separatedBy: "√")
         
-        let oneString = rawArrow[1]
+        let oneString = rawArray[1]
         
         let one = Double(oneString as! String) ?? 0.0
         
