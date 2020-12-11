@@ -82,12 +82,24 @@ func Backend(rawData: String) -> String {
     
     if rawData.contains("√"){
         rawArray = rawData.components(separatedBy: "√")
+        var resultDouble:Double
         
-        let oneString = rawArray[1]
+        if rawArray.count == 2 {
+            let oneString = rawArray[1]
         
-        let one = Double(oneString as! String) ?? 0.0
+            let one = Double(oneString as! String) ?? 0.0
         
-        let resultDouble = Double(sqrt(one))
+            resultDouble = Double(sqrt(one))
+        }
+        else {
+            let oneString = rawArray[0]
+            let twoString = rawArray[1]
+            
+            let one = Double(oneString as! String) ?? 0.0
+            let two = Double(twoString as! String) ?? 0.0
+            
+            resultDouble = Double(pow(two, (1/one)))
+        }
         result = String(resultDouble)
     }
     
