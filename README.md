@@ -1,2 +1,2 @@
 # R3chn3r-SwiftUI
-Calculator written with SwiftUI
+Very basic Calculator written with SwiftUI
